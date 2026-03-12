@@ -9,7 +9,7 @@ This project is built as an educational visualization rather than a full curve e
 
 ## Demo
 
-https://navelorange1999.github.io/bezier-curve/
+https://bezier.chankay.com
 
 ## What It Does
 

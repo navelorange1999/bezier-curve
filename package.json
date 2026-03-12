@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "navelorange1999",
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "NODE_ENV=development vite",
     "build": "vite build",
