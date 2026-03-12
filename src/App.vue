@@ -74,6 +74,7 @@ import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import Tools from "./components/Tools.vue";
 import { CANVAS_COLORS, CANVAS_SIZE } from "./utils/canvasPalette";
 import DrawHelper from "./utils/DrawHelper";
+import { createPresetSmileGroups } from "./utils/presetSmile";
 
 export default defineComponent({
   name: "App",
@@ -81,12 +82,16 @@ export default defineComponent({
     Tools,
   },
   setup() {
+    const createInitialPointGroups = (): PointGroup[] => [
+      ...createPresetSmileGroups(),
+      [],
+    ];
     const cvs = ref<HTMLCanvasElement>();
     const canvasSize = CANVAS_SIZE;
     const drawHelper = reactive<DrawHelper>(
       new DrawHelper(cvs.value?.getContext("2d") ?? undefined)
     );
-    const pointGroups = ref<PointGroup[]>([[]]);
+    const pointGroups = ref<PointGroup[]>(createInitialPointGroups());
     const speed = ref(1);
     const themeVars = {
       "--legend-control": CANVAS_COLORS.control,
@@ -177,6 +182,7 @@ export default defineComponent({
       drawHelper.ctx = cvs.value.getContext("2d")!;
       drawHelper.setSpeed(speed.value);
       redrawGroups();
+      handleDraw();
     });
 
     return {
