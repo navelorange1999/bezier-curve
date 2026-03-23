@@ -1,3 +1,4 @@
+import "@chankay/site-shell/tokens.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 

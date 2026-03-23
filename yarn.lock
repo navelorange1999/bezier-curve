@@ -911,6 +911,11 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
+"@chankay/site-shell@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@chankay/site-shell/-/site-shell-1.0.0.tgz#2d505e91eff3a303e149869fbd217c314f1c8c24"
+  integrity sha512-FLI9Xbxq00CIdK4nDfFhk51GNobb/8KrLMlBUdvs5d7hIhZgNAenYFrvH1pzkF9Egrnth3z9xTUiLE0ISepTxw==
+
 "@emmetio/abbreviation@^2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@emmetio/abbreviation/-/abbreviation-2.2.2.tgz#746762fd9e7a8c2ea604f580c62e3cfe250e6989"

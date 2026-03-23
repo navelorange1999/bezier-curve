@@ -130,8 +130,9 @@ export default defineComponent({
   width: 240px;
   padding: 16px;
   border: 1px solid var(--panel-border-soft);
-  border-radius: 18px;
+  border-radius: calc(var(--radius) * 2.5);
   background: var(--panel-bg-soft);
+  box-shadow: var(--shadow-xs);
 }
 
 .toolbar-section {
@@ -200,7 +201,7 @@ export default defineComponent({
   width: 100%;
   padding: 11px 18px;
   border: 1px solid transparent;
-  border-radius: 12px;
+  border-radius: calc(var(--radius) * 1.5);
   font: inherit;
   font-weight: 600;
   cursor: pointer;
@@ -245,7 +246,7 @@ export default defineComponent({
 .toolbar-hint {
   margin: 0;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: calc(var(--radius) * 1.5);
   background: var(--hint-bg);
   color: var(--hint-text);
   font-size: 14px;
