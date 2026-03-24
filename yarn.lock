@@ -911,10 +911,15 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
-"@chankay/site-shell@1.0.0":
+"@chankay/brand-assets@1.0.0":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@chankay/site-shell/-/site-shell-1.0.0.tgz#2d505e91eff3a303e149869fbd217c314f1c8c24"
-  integrity sha512-FLI9Xbxq00CIdK4nDfFhk51GNobb/8KrLMlBUdvs5d7hIhZgNAenYFrvH1pzkF9Egrnth3z9xTUiLE0ISepTxw==
+  resolved "https://registry.yarnpkg.com/@chankay/brand-assets/-/brand-assets-1.0.0.tgz#06798b5c19e43155ea660d9f99d79675f2174396"
+  integrity sha512-F9f+hqU5ZL73PuC8G54rk77ufeB2SAbU/kwBsVt7kegiUhOsdMogGE/LRj0Ws2wQUhnRTDKintKQgM196xEm4Q==
+
+"@chankay/site-shell@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@chankay/site-shell/-/site-shell-2.0.0.tgz#da41979f7a00252fa19a61c1f5b7b692070778c8"
+  integrity sha512-SYwAdVw4OCrOUMxSyThwePzpC/USnUeBHf4cMTI28Oxb/GmsL7aQFHTW7uZNzYS+UtabzHAX/lTiT1Gxvef9zw==
 
 "@emmetio/abbreviation@^2.2.2":
   version "2.2.2"

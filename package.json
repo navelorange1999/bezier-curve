@@ -11,7 +11,8 @@
     "cz": "git-cz"
   },
   "dependencies": {
-    "@chankay/site-shell": "1.0.0",
+    "@chankay/brand-assets": "1.0.0",
+    "@chankay/site-shell": "2.0.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.5"
   },
