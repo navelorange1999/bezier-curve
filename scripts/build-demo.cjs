@@ -3,11 +3,11 @@ const vue = require("@vitejs/plugin-vue");
 
 function demoTemplate(base) {
   const canonical = "https://demos.chankay.com/bezier/";
-  const preview = "https://chankay-demos-preview.navelorange1999.workers.dev";
-  const releaseRoot = new URL(base, preview).href;
+  const gateway = "https://chankay-demos.navelorange1999.workers.dev";
+  const releaseRoot = new URL(base, gateway).href;
 
   return {
-    name: "bezier-demo-preview-template",
+    name: "bezier-demo-template",
     transformIndexHtml: {
       enforce: "pre",
       transform(html) {
@@ -15,7 +15,7 @@ function demoTemplate(base) {
           html: html
             .replaceAll("https://bezier.chankay.com/favicon/", releaseRoot + "favicon/")
             .replaceAll("https://bezier.chankay.com/", canonical)
-            .replace('src="/src/main.ts"', 'src="/src/preview.ts"')
+            .replace('src="/src/main.ts"', 'src="/src/demo.ts"')
             .replace('content="index,follow"', 'content="noindex,nofollow"')
             .replace(/<script async src="https:\/\/pagead2\.googlesyndication\.com\/[^>]*><\/script>/, ""),
           tags: [
@@ -36,7 +36,7 @@ async function main() {
   }
   const base = `/bezier/_r/${release}/`;
   await build({
-    mode: "demo-preview",
+    mode: "demo",
     configFile: false,
     envFile: false,
     base,

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_ENV=development vite",
     "build": "vite build",
-    "build:demo-preview": "node scripts/build-preview.cjs && python3 scripts/preview_inventory.py",
+    "build:demo": "node scripts/build-demo.cjs && python3 scripts/demo_inventory.py",
     "lint": "vite lint",
     "cz": "git-cz"
   },

@@ -1,4 +1,4 @@
-"""Validate the preview HTML contract and inventory immutable build files."""
+"""Validate the demo HTML contract and inventory immutable build files."""
 
 from collections import Counter
 from hashlib import sha256
@@ -11,7 +11,7 @@ from urllib.parse import urljoin, urlsplit
 
 DIST = Path(__file__).resolve().parents[1] / "dist"
 CANONICAL = "https://demos.chankay.com/bezier/"
-PREVIEW_HOST = "chankay-demos-preview.navelorange1999.workers.dev"
+GATEWAY_HOST = "chankay-demos.navelorange1999.workers.dev"
 MIME = {
     ".css": "text/css",
     ".html": "text/html",
@@ -91,8 +91,8 @@ def main():
     prefix = f"/bezier/_r/{release}/"
 
     def asset_path(url):
-        location = urlsplit(urljoin(f"https://{PREVIEW_HOST}/bezier/", url))
-        if location.scheme != "https" or location.netloc != PREVIEW_HOST or not location.path.startswith(prefix):
+        location = urlsplit(urljoin(f"https://{GATEWAY_HOST}/bezier/", url))
+        if location.scheme != "https" or location.netloc != GATEWAY_HOST or not location.path.startswith(prefix):
             raise ValueError("Asset must point into the current release")
         path = location.path[len(prefix):]
         if path not in files:
@@ -102,7 +102,7 @@ def main():
     assets = Counter(Path(asset_path(url)).suffix for url in template.urls)
     if not assets[".css"] or not assets[".js"]:
         raise ValueError("Missing application CSS or JavaScript")
-    manifest_url = urljoin(f"https://{PREVIEW_HOST}/bezier/", template.manifests[0])
+    manifest_url = urljoin(f"https://{GATEWAY_HOST}/bezier/", template.manifests[0])
     manifest = json.loads((DIST / asset_path(manifest_url)).read_text())
     for icon in manifest["icons"]:
         asset_path(urljoin(manifest_url, icon["src"]))

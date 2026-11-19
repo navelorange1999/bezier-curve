@@ -2,7 +2,7 @@ const { createHash } = require("node:crypto");
 const fs = require("node:fs/promises");
 const path = require("node:path");
 
-const publisher = "https://chankay-demo-publisher-preview.navelorange1999.workers.dev";
+const publisher = "https://chankay-demo-publisher.navelorange1999.workers.dev";
 const dist = path.resolve(__dirname, "../dist");
 
 module.exports = async function publish({ core, release }) {
@@ -16,15 +16,15 @@ module.exports = async function publish({ core, release }) {
   const inventory = await fs.readFile(inventoryPath);
   const { locale, files } = JSON.parse(inventory);
   if (locale !== "en" || !Array.isArray(files) || !files.length || files.length > 512) {
-    throw new Error("Invalid preview inventory");
+    throw new Error("Invalid demo inventory");
   }
   const readiness = await fetch(new URL("/ready", publisher), {
     redirect: "error",
     signal: AbortSignal.timeout(10000),
   });
   const status = readiness.status === 200 ? await readiness.json() : null;
-  if (status?.service !== "bezier-preview-publisher" || status.version !== 1) {
-    throw new Error(`Preview publisher is not ready (HTTP ${readiness.status})`);
+  if (status?.service !== "bezier-publisher" || status.version !== 1) {
+    throw new Error(`Demo publisher is not ready (HTTP ${readiness.status})`);
   }
   const identity = await core.getIDToken(publisher);
   const releaseUrl = new URL(`/v1/bezier/${release}/`, publisher);
@@ -38,7 +38,7 @@ module.exports = async function publish({ core, release }) {
       signal: AbortSignal.timeout(30000),
     });
     if (!response.ok) {
-      throw new Error(`Preview publisher returned HTTP ${response.status}`);
+      throw new Error(`Demo publisher returned HTTP ${response.status}`);
     }
   }
 
