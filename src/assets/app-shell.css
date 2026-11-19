@@ -1,4 +1,4 @@
-:root {
+#app {
   --page-text: var(--foreground);
   --page-text-strong: color-mix(in oklab, var(--foreground) 92%, black);
   --page-text-soft: color-mix(

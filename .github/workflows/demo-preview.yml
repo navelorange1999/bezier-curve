@@ -1,0 +1,57 @@
+name: Build Bézier demo preview
+
+on:
+  push:
+    branches: [codex/bezier-demo-preview]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned dependencies
+        run: corepack yarn install --frozen-lockfile
+      - name: Build and verify the release
+        env:
+          DEMO_RELEASE: ${{ github.sha }}
+        run: corepack yarn build:demo-preview
+      - name: Upload verified build
+        uses: actions/upload-artifact@v4
+        with:
+          name: bezier-preview-dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: bezier-preview-dist
+          path: dist/
+      - name: Publish this verified release to preview R2
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const publish = require("./scripts/publish-preview.cjs");
+            await publish({ core, release: context.sha });
+            await core.summary
+              .addHeading("Bézier preview published")
+              .addRaw(context.sha)
+              .write();
