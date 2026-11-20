@@ -97,3 +97,11 @@ src/
 - Control points can be added, but not dragged, edited, or removed individually.
 - The current UI starts drawing only when there are at least 3 control points.
 - This is a visualization demo focused on curve construction, not a production-ready design tool.
+
+## Versioned demo releases
+
+The `codex/bezier-demo-preview` branch publishes the shared-shell build under `/bezier/`. The `master` branch powers the standalone demo at `bezier.chankay.com`.
+
+To verify the versioned build locally with Node 22 and Corepack, run `DEMO_SLUG=bezier DEMO_RELEASE=$(git rev-parse HEAD) bash scripts/build-demo.sh`. The build checks the shell slots, canonical URL, and release-scoped asset references, then writes the file inventory to `dist/release.json`.
+
+Pull requests targeting the demo branch build without deployment credentials. A push to the demo branch calls the pinned `chankay-demo-template` release workflow. Its `demo-release` environment selects the release branch, slug, R2 endpoint, and bucket-scoped upload credentials. The active release advances after the uploaded files pass verification.

@@ -1,57 +1,17 @@
 name: Publish Bézier demo
 
 on:
+  pull_request:
+    branches: [codex/bezier-demo-preview]
   push:
     branches: [codex/bezier-demo-preview]
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-      - name: Install pinned dependencies
-        run: corepack yarn install --frozen-lockfile
-      - name: Build and verify the release
-        env:
-          DEMO_RELEASE: ${{ github.sha }}
-        run: corepack yarn build:demo
-      - name: Upload verified build
-        uses: actions/upload-artifact@v4
-        with:
-          name: bezier-dist
-          path: dist/
-          if-no-files-found: error
-          retention-days: 7
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/download-artifact@v4
-        with:
-          name: bezier-dist
-          path: dist/
-      - name: Publish this verified release to R2
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const publish = require("./scripts/publish-demo.cjs");
-            await publish({ core, release: context.sha });
-            await core.summary
-              .addHeading("Bézier demo published")
-              .addRaw(context.sha)
-              .write();
+  demo:
+    uses: navelorange1999/chankay-demo-template/.github/workflows/release.yml@4d0102519cb315c157ad306d3c85858d9a003b1e
+    with:
+      slug: bezier
