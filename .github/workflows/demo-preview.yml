@@ -1,0 +1,20 @@
+name: Publish Bézier demo
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  demo:
+    uses: navelorange1999/chankay-demo-template/.github/workflows/release.yml@683bfe7bb5f5939ff600529957d74038daf96d8f
+    with:
+      slug: bezier
+    secrets:
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
