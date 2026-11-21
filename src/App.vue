@@ -1,6 +1,6 @@
 <template>
   <div class="page-shell" :style="themeVars">
-    <div ref="shellHeaderTarget" class="shell-slot"></div>
+    <slot name="header" />
 
     <main class="page-main">
       <div class="container">
@@ -23,7 +23,7 @@
       </div>
     </main>
 
-    <div ref="shellFooterTarget" class="shell-slot"></div>
+    <slot name="footer" />
   </div>
 </template>
 
@@ -34,7 +34,6 @@ import "./assets/app-shell.css";
 import PageHero from "./components/PageHero.vue";
 import WorkspaceSection from "./components/WorkspaceSection.vue";
 import { useBezierWorkspace } from "./composables/useBezierWorkspace";
-import { useSiteShell } from "./composables/useSiteShell";
 
 export default defineComponent({
   name: "App",
@@ -43,21 +42,10 @@ export default defineComponent({
     WorkspaceSection,
   },
   setup() {
-    const siteShell = useSiteShell({
-      siteName: "Bezier Curve Visualizer",
-      repoUrl: "https://github.com/navelorange1999/bezier-curve",
-    });
     const bezierWorkspace = useBezierWorkspace();
 
-    onMounted(() => {
-      siteShell.mountShellSections();
-      bezierWorkspace.initializeCanvas();
-    });
-
-    return {
-      ...siteShell,
-      ...bezierWorkspace,
-    };
+    onMounted(bezierWorkspace.initializeCanvas);
+    return bezierWorkspace;
   },
 });
 </script>
