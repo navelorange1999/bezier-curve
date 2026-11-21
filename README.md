@@ -9,7 +9,7 @@ This project is built as an educational visualization rather than a full curve e
 
 ## Demo
 
-https://bezier.chankay.com
+https://demos.chankay.com/bezier/
 
 ## What It Does
 
@@ -100,7 +100,7 @@ src/
 
 ## Versioned demo releases
 
-The default `master` branch publishes the shared-shell build under `/bezier/` on the demos gateway. The standalone build continues to use the legacy entry point for `bezier.chankay.com` and GitHub Pages.
+The default `master` branch publishes the shared-shell build at `https://demos.chankay.com/bezier/`. The standalone Vite entry supports local development.
 
 To verify the versioned build locally with Node 22 and Corepack, run `DEMO_SLUG=bezier DEMO_RELEASE=$(git rev-parse HEAD) bash scripts/build-demo.sh`. The build checks the shell slots, canonical URL, and release-scoped asset references, then writes the file inventory to `dist/release.json`.
 
