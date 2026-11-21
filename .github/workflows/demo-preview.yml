@@ -12,6 +12,9 @@ permissions:
 
 jobs:
   demo:
-    uses: navelorange1999/chankay-demo-template/.github/workflows/release.yml@b6a53afdf3e9f0d064f8ad112e61da17ac69c3c4
+    uses: navelorange1999/chankay-demo-template/.github/workflows/release.yml@683bfe7bb5f5939ff600529957d74038daf96d8f
     with:
       slug: bezier
+    secrets:
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
