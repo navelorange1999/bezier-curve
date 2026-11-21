@@ -12,6 +12,6 @@ permissions:
 
 jobs:
   demo:
-    uses: navelorange1999/chankay-demo-template/.github/workflows/release.yml@4d0102519cb315c157ad306d3c85858d9a003b1e
+    uses: navelorange1999/chankay-demo-template/.github/workflows/release.yml@b6a53afdf3e9f0d064f8ad112e61da17ac69c3c4
     with:
       slug: bezier
