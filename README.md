@@ -108,6 +108,4 @@ The default `master` branch publishes the shared-shell build at `https://demos.c
 
 To verify the versioned build locally with Node 22 and Corepack, run `DEMO_SLUG=bezier DEMO_RELEASE=$(git rev-parse HEAD) bash scripts/build-demo.sh`. The build checks the shell slots, canonical URL, and release-scoped asset references, then writes the file inventory to `dist/release.json`.
 
-Pull requests targeting `master` verify the shared-shell build. A push to `master` publishes through the pinned `chankay-demo-template` release workflow. The `release` environment supplies the R2 settings and bucket-scoped upload credentials. The active release advances after the uploaded files pass verification.
-
-The workflow file is still named `demo-preview.yml` to preserve its GitHub Actions run numbers, which release promotion uses to order writes to R2.
+Pull requests targeting `master` verify the shared-shell build. A push to `master` publishes through [the release workflow](.github/workflows/release.yml), which calls the pinned `chankay-demo-template` publisher. The `release` environment supplies the R2 settings and bucket-scoped upload credentials. The active release advances after the uploaded files pass verification.
