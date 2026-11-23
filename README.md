@@ -81,10 +81,14 @@ yarn build
 
 ```text
 src/
-├── App.vue                 # Canvas page and interaction logic
+├── App.vue                  # Shared canvas page
+├── main.ts                  # Standalone Vite entry with local site chrome
+├── demo.ts                  # Versioned release entry for the shared gateway
 ├── components/
-│   ├── Tools.vue           # Clear / draw controls
-│   └── Record.vue          # Unused point list component
+│   ├── Tools.vue            # Canvas controls
+│   └── WorkspaceSection.vue # Canvas and legend layout
+├── composables/
+│   └── useBezierWorkspace.ts # Point groups and drawing controls
 ├── utils/
 │   ├── bezierUtils.ts      # Linear interpolation helper
 │   └── DrawHelper.ts       # Canvas drawing and recursive Bezier animation
@@ -104,4 +108,4 @@ The default `master` branch publishes the shared-shell build at `https://demos.c
 
 To verify the versioned build locally with Node 22 and Corepack, run `DEMO_SLUG=bezier DEMO_RELEASE=$(git rev-parse HEAD) bash scripts/build-demo.sh`. The build checks the shell slots, canonical URL, and release-scoped asset references, then writes the file inventory to `dist/release.json`.
 
-Pull requests targeting `master` run the shared-shell build. A push to `master` calls the pinned `chankay-demo-template` release workflow. Its protected `release` environment authorizes `master` and supplies the slug, R2 endpoint, and bucket-scoped upload credentials. The active release advances after the uploaded files pass verification.
+Pull requests targeting `master` verify the shared-shell build. A push to `master` publishes through [the release workflow](.github/workflows/release.yml), which calls the pinned `chankay-demo-template` publisher. The `release` environment supplies the R2 settings and bucket-scoped upload credentials. The active release advances after the uploaded files pass verification.

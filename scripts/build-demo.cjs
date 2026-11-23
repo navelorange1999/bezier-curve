@@ -13,8 +13,7 @@ function demoTemplate(base) {
       transform(html) {
         return {
           html: html
-            .replaceAll("https://bezier.chankay.com/favicon/", releaseRoot + "favicon/")
-            .replaceAll("https://bezier.chankay.com/", canonical)
+            .replaceAll(canonical + "favicon/", releaseRoot + "favicon/")
             .replace('src="/src/main.ts"', 'src="/src/demo.ts"')
             .replace('content="index,follow"', 'content="noindex,nofollow"')
             .replace(/<script async src="https:\/\/pagead2\.googlesyndication\.com\/[^>]*><\/script>/, ""),
